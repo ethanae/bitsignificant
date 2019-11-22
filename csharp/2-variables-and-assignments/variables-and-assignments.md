@@ -9,14 +9,14 @@ The power of variables come from their ability to hold our data, allow us to acc
 Note: variables are just human-readable identifiers of data and it is important to give your variables appropriate and meaningful names.
 
 ### Variable Declaration
-#### Declaring a variable means that we have give a name to an identifier that doesn't hold any data yet. This is an important distinction between variable declaration and variable initialistion. 
+#### Declaring a variable means that we give a name to an identifier that doesn't hold any data yet. This is an important distinction between variable declaration and variable initialistion. 
 
 #### Variable declaration syntax is mostly the same across different language; first we decide the variable type (the kind of data it will hold, integers, doubles, strings, characters, booleans, etc.), then we decide on a name for our variable.
 
 ```
 int age;
 ```  
-Below is a declartion of an variable called age that will only old any single integer.  
+Above is a declartion of an variable called age that will only old any single integer.  
   
 ```
 string name;
