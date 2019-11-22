@@ -17,6 +17,11 @@ Note: variables are just human-readable identifiers of data and it is important 
 int age;
 ```  
 Above is a declartion of an variable called age that will only old any single integer.  
+
+```
+char initial;
+```  
+Above is a variable called 'initial' which is of type _char_ that can only hold a single character at a time. This may hold the first character of a person's first name.  
   
 ```
 string name;
@@ -28,13 +33,32 @@ bool isRetired;
 ```  
 Here we have a variable called `isRetired` which might tell us whether if a person is retired or not. `bool`s are boolean types in that they can only hold `true` or `false`.
   
-```
-char initial;
-```  
-Above is a variable called 'initial' which is of type _char_ that can only hold a single character at a time. This may hold the first character of a person's first name.  
-  
 Take note of the names of our variables we have decided on. It is easy to reason about the types but just looking at their names. For instance, by looking at the 'age' variable above it is easy to see that by its name it should only hold integers. Similarly, the variable 'name' should hold someone's name and is a combination of characters which form something readable. 
 
 A variable's name should describe the data it will eventually hold.
 
-### Variable declaration
+### Variable Initialisation
+Once our variables are declared we can start giving them data to store.
+
+Initialisation means we are giving our newly declared variable a value for the first time. The way to do this is through variable assignment using the assignment operator. 
+
+Taking the age example from the snippet above:  
+```
+age = 32;
+```  
+Our 'age' variable now stores the integer 32!  
+Note that we don't have to specify the variable type again, we just type which variable to which we want to assign data.
+
+Similarly, for our other variables that we've previously declared:  
+
+```
+name = "John Doe";
+
+initial = 'J';
+
+isRetired = false;
+```
+
+Some things to notice:
+1. We use double quotes to create `string`s
+2. We use single quotes to create `char`s
