@@ -78,15 +78,15 @@ int age = 65;
 ```
   
 ### Tips and Tricks
-In C#, there is some short-hand syntax when initialising a variable right away. Remeber that every variable has a type so that the both us and compiler know what data it will hold.
+In C#, there is some short-hand syntax when initialising a variable right away. Remember that every variable has a type so that both humans and compiler knows what data it can hold.
 
-If you know what the type of data you want to hold then you can do the following:  
+If you know what the type of data you want your variables to hold then you can do the following:  
 ```
 var age = 11; // this is an integer!
 var name = "John Doe"; // this is a string!
 var isRetired = false; // this is a boolean!
 var initial = 'J'; // this is a char!
-```    
+```  
 Notice we used the _var_ keyword here which replaces the variable _type_ we were using previously. The _var_ keyword is special because it tells the compiler that we are still declaring a variable as always but we telling the compiler to *infer* the type of our variable!
 
 This is called type inference, but the compiler can only infer the variable type when we immediately give it a value. For instance, the snippet below results in an error:  
