@@ -35,7 +35,7 @@ Here we have a variable called `isRetired` which might tell us whether if a pers
   
 Take note of the names of our variables we have decided on. It is easy to reason about the types but just looking at their names. For instance, by looking at the 'age' variable above it is easy to see that by its name it should only hold integers. Similarly, the variable 'name' should hold someone's name and is a combination of characters which form something readable. 
 
-A variable's name should describe the data it will eventually hold.
+A variable's name should describe the data it is intended to hold.
 
 ### Variable Initialisation
 Once our variables are declared we can start giving them data to store.
@@ -62,3 +62,4 @@ isRetired = false;
 Some things to notice:
 1. We use double quotes to create `string`s
 2. We use single quotes to create `char`s
+3. Valid boolean values are only `true` and `false`
