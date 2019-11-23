@@ -38,7 +38,7 @@ Take note of the names of our variables we have decided on. It is easy to reason
 A variable's name should describe the data it is intended to hold.
 
 ### Variable Initialisation
-Once our variables are declared we can start giving them data to store.
+Variables without any data aren't very useful to us. Once our variables are declared we can start giving them data to store.
 
 Initialisation means we are giving our newly declared variable a value for the first time. The way to do this is through variable assignment using the assignment operator. 
 
@@ -63,3 +63,37 @@ Some things to notice:
 1. We use double quotes to create `string`s
 2. We use single quotes to create `char`s
 3. Valid boolean values are only `true` and `false`
+
+### Declaration and Initialisation
+More often that not we want to store some data inside our variables as soon as we declare them. The following is quite can become tedious to write in large programs.
+
+```
+int age;
+age = 65;
+```
+  
+Instead we can combine the above two lines into one, which saves us some typing:  
+```
+int age = 65;
+```
+  
+### Tips and Tricks
+In C#, there is some short-hand syntax when initialising a variable right away. Remeber that every variable has a type so that the both us and compiler know what data it will hold.
+
+If you know what the type of data you want to hold then you can do the following:  
+```
+var age = 11; // this is an integer!
+var name = "John Doe"; // this is a string!
+var isRetired = false; // this is a boolean!
+var initial = 'J'; // this is a char!
+```    
+Notice we used the _var_ keyword here which replaces the variable _type_ we were using previously. The _var_ keyword is special because it tells the compiler that we are still declaring a variable as always but we telling the compiler to *infer* the type of our variable!
+
+This is called type inference, but the compiler can only infer the variable type when we immediately give it a value. For instance, the snippet below results in an error:  
+```
+var age; // this is not allowed because the compiler has no idea what type to attribute to our variable!
+```  
+To fix this, when we use _var_ we must always give our variables values right away:  
+```
+var age = 11; // and the compiler correctly infers our age variable to be of type integer!
+```
