@@ -18,13 +18,13 @@ This is a C# extenstion for our IDE and it helps with syntax highlighting so we 
 
 #### Once you've installed everything you can following the below instructions to make sure everything is installed correctly:
 1. Open a command prompt window or Windows Powershell and type `dotnet` (close any existing open terminal windows)
-2. Create a folder where you want to keep all your projects you create in this course, this can be anywhere, for simplicity you can create a folder under the root of your C drive: `C:\csharp-projects` 
+2. Create a folder where you want to keep all your projects you create in this course, this can be anywhere, for simplicity you can create a folder under the root of your C drive: `C:\csharp-projects` or on Linux systems under `/usr/csharp-projects`
 3. In your newly created folder create another folder called `dotnet-test`
 4. Open your folder `dotnet-test` in Visual Studio Code, navigate to View -> Integrated Terminal (shortcut is _Ctrl + `_), and type the following in the terminal which will create a new dotnet console project:  
 ```
 dotnet new console
 ```
-You will see some files automagically created for you, a `HelloWorld.cs` file and a `HelloWorld.csproj` file. Don't worry about what those files mean for now, we'll explain those later!  
+You will see some files auto-magically created for you, a `HelloWorld.cs` file and a `HelloWorld.csproj` file. Don't worry about what those files mean for now, we'll explain those later!  
 In your terminal type the following two commands and run it:  
 ```
 dotnet restore  
