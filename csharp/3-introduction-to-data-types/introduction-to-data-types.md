@@ -2,9 +2,9 @@
 
 ## 3. An Introduction to Data Types
 
-### Data types form an integral part of statically-typed language such as C#. For now, we are going to explore some types provided to us by the language itself. These types are called primitive data types because they are the usually the most basic types.
+### Data types form an integral part of any programming language. For now, we are going to explore some basic types provided to us by the language itself. These types are called _primitive data types_ because they are the usually the most basic types.
 
-### We're going to look at the type listed below:
+### We're going to look at the primitive types listed below:
 - `boolean`
 - `int`
 - `double`
@@ -14,37 +14,41 @@
 - `string`
 
 ### 1. Boolean 
-A boolean type refers to the values `true` and `false` only. This type gives us the ability to model true/false cases in our code. As you saw in our previous example we saw the declaration of a variable called `isRetired`, we could use this variable to test determine if a user is a pensioner and then discount to some item they want to purchase.  
+A boolean type refers to the values `true` and `false` only. This type gives us the ability to model true/false cases in our code. As you saw in our previous example we saw the declaration of a variable called `isRetired`, we could use this variable to determine if a user is a pensioner and then discount to some item they want to purchase.  
 
 We can use the boolean value like this:
 ```
-if (isRetired) {
+if (isRetired) 
+{
     // some code to apply our discount
-} else {
+} 
+else 
+{
 
 }
 ```
 
-We've used an _if-else-statement_ here which tests the value of a boolean type. 
+For illustration purposes, we've used a new construct called the _if-else-statement_ which helps us here which tests the value of a boolean type. These structures are part of _control flow_ which we'll cover in detail later on, so don't worry about it too much now.  
 
 #### Boolean operations
-As we saw above an _if-else-statement_ can be used to test a boolean value but we can form much more complex expressions with boolean types.
+As we saw above an, _if-else-statement_ can be used to test a boolean value but we can form much more complex expressions with boolean types.
 
-Let's introduce another variable called `isStoreMember` which tells us if a customer is the member of our imaginary store and we want to give customers discount if they're pensioners AND (`&&`) they're a member at our store. Our program might look like:   
+Let's introduce another variable called `isStoreMember` which tells us if a customer is a member of our imaginary store, and we want to give customers discount if they're pensioners AND (`&&`) they're members at our store. Our program might look like:   
 ```
 var isRetired = true;
 var isStoreMember = true;
 var shouldApplyDiscount = isRetired && isStoreMember;
 
-if (shouldApplyDiscount) {
+if (shouldApplyDiscount) 
+{
     // some code to apply our discount
 }
 ```  
 Here we are using a new-looking symbol, the double ampersand, `&&`. When we use this syntax we are creating an expression, in this case a boolean expression. You should read `&&` as "AND", which means that both values on either side of the double ampersand should be `true` for the whole expression to be true.
 
-Note that we also get a single ampersand operator, `&`. Firstly, remember that `&&` needs to both values on either side to be true which means if the first operand is `false` we already know that the rest of expression cannot possibly be true because we've already encountered a false value meaning that we don not need to even evaluate the rest of remaining expression. In a sense, `&&` short-circuits expression evaluation. 
+Note that we also get a single ampersand operator, `&`. Firstly, remember that `&&` needs to both values on either side to be true which means if the first operand is `false` we already know that the whole expression cannot possibly be true because we've already encountered a `false` value meaning that we do not need to even evaluate the rest of remaining expression (this is called short-circuiting). So, `&&` can short-circuit expression evaluation. 
   
-The `&` operator works a little differently, in that it will always evaluate all operands of our expression but the end value remains the same as `&&`. So if either operand is false, our whole expression with be `false` otherwise all operands are `true` and our whole expression is `true`.
+We also get a single ampersand, `&`, operator that works a little differently compared to `&&`, in that it will always evaluate all operands of our expression but the end value remains the same as `&&`. So if either operand is `false`, our whole expression with be `false` otherwise all operands are `true` and our whole expression is `true`.
 
 Some examples:  
 ```
