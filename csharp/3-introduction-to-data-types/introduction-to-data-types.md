@@ -95,42 +95,43 @@ We need to calculate the discount for a purchase, so the purchase is worth 500 s
 `purchaseAmount = purchaseAmount - purchaseAmount / 10;` 
 
 Breaking this up, we get the following process of how the computer executes our code:
-1. Take the value in purchaseAmount -> `purchaseAmount = 500 - 500 / 10`
+1. Take the value in purchaseAmount and we get: `purchaseAmount = 500 - 500 / 10`
 2. Calculate the division of 500 and 10, `/` means divide in programming so we get `500 / 10 = 50`
-3. Take the intermediate result of the above division and subtract it from purchaseAmount, you can envision the line changing to `purchaseAmount = 500 - 50` 
+3. Take the intermediate result of the above division and subtract it from purchaseAmount, our line may look like: `purchaseAmount = 500 - 50` 
 4. Calculate `500 - 50` and our line changes to: `purchaseAmount = 450;`
-5. Our calculation is complete and the computer concludes by re-assigning our `purchaseAmount` variable to the value of `450`
+5. Our calculation is complete and the computer concludes by re-assigning the value of `450` o our `purchaseAmount` variable 
 
-It is important to note the order of operations here, divide took preference over the subtraction, if the computer instead did the substration first, we'd get a result of `purchaseAmount = 0 / 10` and that's not correct mathematically. And so, programming languages are aware enough to ensure our operations take place in the correct order, this is called `operator precedence`. Briefly, divide `/` has a higher precedence than subtraction `-`, just like in regular arithemetic.
+It is important to note the order of operations here, divide took preference over the subtraction, if the computer instead did the subtraction first, we'd get a result of `purchaseAmount = 0 / 10` and that's not correct mathematically. And so, programming languages are aware enough to ensure our operations take place in the correct order, this is called `operator precedence`. Briefly, divide `/` has a higher precedence than subtraction `-`, just like in regular arithemetic.
+
+We could have also used parentheses in our program to explicitly describe our desired order of operations: `purchaseAmount = purchaseAmount - purchaseAmount / 10;` is equivalent to `purchaseAmount = purchaseAmount - (purchaseAmount / 10);`. Parentheses tell our program to do give everything inside of it the highest precedence, and is therefore evaluated before anything else.
 
 #### Floating Point Numbers
-Integers are certainly useful, but they don't always serve every situation well. To accurately model our store programming, we need to be able to represent cents, i.e. fractional parts. That's where floating point numbers come in! The name _floating point_ refers to the dot to separate integral and fractional parts. The floating point number `250.99` has an integral part of `250` and a fractional part of `99`.
+Integers are certainly useful, but they don't always serve every situation well. To accurately model our store program, we need to be able to represent cents, i.e. fractional parts. That's where floating point numbers come in! The name _floating point_ refers to the dot that separates integral parts form fractional parts. The floating point number `250.99` has an integral part of `250` and a fractional part of `99`.
 
-For now, we'll look at two floating point types `float` and `double`. To make our store more accurate with discount calculations we can store our purchase amount as a `float`:
+For now, we'll look at two floating point types `float` and `double`. To make our store program more accurate and realistic with discount calculations we can store our purchase amount as a `float`:
 
 ```
 var isRetired = true;
 var isStoreMember = true;
 var shouldApplyDiscount = isRetired && isStoreMember;
-// a new variable to hold the purchase amount, note the variable type int
-float purchaseAmount = 500.0; // notice our variable type of float
+// notice our variable type of float
+float purchaseAmount = 500.0; 
 // below is the amount of discount we want to give our members
 int discountAmount = 10; 
 
 if (shouldApplyDiscount) 
 {
-    // now we can use our integer variable to calculate discount
-    // be careful here, the below may look very strange, how can we use a variable and then assign it back to itself? And what does / mean?!
+    // now we can use our float variable to calculate discount
     purchaseAmount = purchaseAmount - purchaseAmount / 10; // purchaseAmount = 500 - 500.0 / 10 = 500 - 50.0 = 450.0 
 }
 ``` 
 
-The same order of operations following for the previous version of our program with integers, but it is important to note that purchaseAmount is now of type `float` and cannot be anything else. We could have also used the type `double` to represent our purchaseAmount; the only difference between `float`and `double` is that `double` can represent many more numbers than `float` as shown in the _number precision_ section. 
+The order of operations are the same for the previous version of our program with integers, but it is important to note that purchaseAmount is now of type `float` and cannot be anything else. We could have also used the type `double` to represent our purchaseAmount; the only difference between `float` and `double` is that `double` can represent many more numbers than `float` as shown in the _number precision_ section. 
 
-You might wonder why we can divide a floating point number, `500.0`, by an integer, `10`. This is because these number types are compatible as far as arithmetic operations go. When using an two number types in a calculation, the programming language will always try and provide you with the most precise type as the result. For instance, `float` is more precise than `int`, but `double` is more precise than both `int` and `float`. Precision usually refers to the range of numbers a particular type can represent.
+You might wonder why we can divide a floating point number, `500.0`, by an integer, `10`. They're not the same type! We can do this because these number types are compatible as far as arithmetic operations go. When using two number types in a calculation, programming languages will always try and provide you with the most precise type as the result. For instance, `float` is more precise than `int`, but `double` is more precise than both `int` and `float`. Precision usually refers to the range of numbers a particular type can represent.
 
-In our example we are dividing a `float` with an `int`, meaning we get back a `float`. In our first example we divided an `int` by an `int` which gave us an `int`.
+In our example we are dividing a `float` with an `int`, that means our operation results in a `float`. In our first example we divided an `int` by an `int` which gave us an `int`. For completeness, if did divided a `float` or `int` by a `double`, our operation will result in a `double`. We always get the most precise type present in our calculation back out.
 
-*Beware* of something called integer division, this occur when dividing an `int` by another `int` and this means we may lose numbers! Take for example `365 / 10`, you'd expect the result to be `36.5` (but that's a `float` type!), our result will in fact be just `36`, we lose our half. This is because the language cannot make any assumptions as to what we are trying to achieve and must take the predictable path of always giving us a resultant `int` type when dividing two integers. 
+*Beware* of something called _integer division_, this occur when dividing an `int` by another `int` and means we may lose numbers! Take for example `365 / 10`, you'd expect the result to be `36.5` (but that's a `float` type!), our result will in fact be just `36`, our `0.5` is thrust into the ether never to be seen again. This is because programming languages cannot make any assumptions as to what we are trying to achieve and must take the predictable path of always giving us a resultant `int` type when dividing two integers. 
 
 #### Number operations
