@@ -64,3 +64,73 @@ var shouldApplyDiscount = isRetired & isStoreMember; // isRetired is false again
 ```
 
 It helps to think of `&&` and `&` as resulting in the exact same values for the same expressions in all cases. However, `&&` will short-circuit expression evaluation whereas `&` doesn't short-circuit and will evaluate all operands.
+
+### 2. Numbers  
+In C#, there is not a single number type but several. For now, lets focus on the most commonly used number types, `int`, `float`, and `double`.
+
+#### Integers
+In the number system and in programming, integers represent integral parts of numbers like 1, 578, and 3876545. We cannot represent fractional parts with the `int`eger type.
+
+Let's change our store discount program a little and start calculating discounts for members:
+```
+var isRetired = true;
+var isStoreMember = true;
+var shouldApplyDiscount = isRetired && isStoreMember;
+// a new variable to hold the purchase amount, note the variable type int
+int purchaseAmount = 500;
+// below is the amount of discount we want to give our members
+int discountAmount = 10; // this means 10% discount on all purchases!
+
+if (shouldApplyDiscount) 
+{
+    // now we can use our integer variable to calculate discount
+    // be careful here, the below may look very strange, how can we use a variable and then assign it back to itself? And what does / mean?!
+    purchaseAmount = purchaseAmount - purchaseAmount / 10; // purchaseAmount = 500 - 500 / 10 = 500 - 50 = 450. 
+}
+```  
+
+This may be a lot to take in, let's understand it.
+
+We need to calculate the discount for a purchase, so the purchase is worth 500 so we need to substract the discount from that. The following line handles that calculation:  
+`purchaseAmount = purchaseAmount - purchaseAmount / 10;` 
+
+Breaking this up, we get the following process of how the computer executes our code:
+1. Take the value in purchaseAmount -> `purchaseAmount = 500 - 500 / 10`
+2. Calculate the division of 500 and 10, `/` means divide in programming so we get `500 / 10 = 50`
+3. Take the intermediate result of the above division and subtract it from purchaseAmount, you can envision the line changing to `purchaseAmount = 500 - 50` 
+4. Calculate `500 - 50` and our line changes to: `purchaseAmount = 450;`
+5. Our calculation is complete and the computer concludes by re-assigning our `purchaseAmount` variable to the value of `450`
+
+It is important to note the order of operations here, divide took preference over the subtraction, if the computer instead did the substration first, we'd get a result of `purchaseAmount = 0 / 10` and that's not correct mathematically. And so, programming languages are aware enough to ensure our operations take place in the correct order, this is called `operator precedence`. Briefly, divide `/` has a higher precedence than subtraction `-`, just like in regular arithemetic.
+
+#### Floating Point Numbers
+Integers are certainly useful, but they don't always serve every situation well. To accurately model our store programming, we need to be able to represent cents, i.e. fractional parts. That's where floating point numbers come in! The name _floating point_ refers to the dot to separate integral and fractional parts. The floating point number `250.99` has an integral part of `250` and a fractional part of `99`.
+
+For now, we'll look at two floating point types `float` and `double`. To make our store more accurate with discount calculations we can store our purchase amount as a `float`:
+
+```
+var isRetired = true;
+var isStoreMember = true;
+var shouldApplyDiscount = isRetired && isStoreMember;
+// a new variable to hold the purchase amount, note the variable type int
+float purchaseAmount = 500.0; // notice our variable type of float
+// below is the amount of discount we want to give our members
+int discountAmount = 10; 
+
+if (shouldApplyDiscount) 
+{
+    // now we can use our integer variable to calculate discount
+    // be careful here, the below may look very strange, how can we use a variable and then assign it back to itself? And what does / mean?!
+    purchaseAmount = purchaseAmount - purchaseAmount / 10; // purchaseAmount = 500 - 500.0 / 10 = 500 - 50.0 = 450.0 
+}
+``` 
+
+The same order of operations following for the previous version of our program with integers, but it is important to note that purchaseAmount is now of type `float` and cannot be anything else. We could have also used the type `double` to represent our purchaseAmount; the only difference between `float`and `double` is that `double` can represent many more numbers than `float` as shown in the _number precision_ section. 
+
+You might wonder why we can divide a floating point number, `500.0`, by an integer, `10`. This is because these number types are compatible as far as arithmetic operations go. When using an two number types in a calculation, the programming language will always try and provide you with the most precise type as the result. For instance, `float` is more precise than `int`, but `double` is more precise than both `int` and `float`. Precision usually refers to the range of numbers a particular type can represent.
+
+In our example we are dividing a `float` with an `int`, meaning we get back a `float`. In our first example we divided an `int` by an `int` which gave us an `int`.
+
+*Beware* of something called integer division, this occur when dividing an `int` by another `int` and this means we may lose numbers! Take for example `365 / 10`, you'd expect the result to be `36.5` (but that's a `float` type!), our result will in fact be just `36`, we lose our half. This is because the language cannot make any assumptions as to what we are trying to achieve and must take the predictable path of always giving us a resultant `int` type when dividing two integers. 
+
+#### Number operations
