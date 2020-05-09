@@ -65,11 +65,11 @@ var shouldApplyDiscount = isRetired & isStoreMember; // isRetired is false again
 
 It helps to think of `&&` and `&` as resulting in the exact same values for the same expressions in all cases. However, `&&` will short-circuit expression evaluation whereas `&` doesn't short-circuit and will evaluate all operands.
 
-### 2. Numbers  
+### 2. Numeric Types  
 In C#, there is not a single number type but several. For now, lets focus on the most commonly used number types, `int`, `float`, and `double`.
 
 #### Integers
-In the number system and in programming, integers represent integral parts of numbers like 1, 578, and 3876545. We cannot represent fractional parts with the `int`eger type.
+In the number system and in programming, integers represent only integral parts like the numbers 1, 578, and -3876545. We cannot represent fractional parts with the integer type.
 
 Let's change our store discount program a little and start calculating discounts for members:
 ```
@@ -83,7 +83,7 @@ int discountAmount = 10; // this means 10% discount on all purchases!
 
 if (shouldApplyDiscount) 
 {
-    // now we can use our integer variable to calculate discount
+    // now we can use our new integer variable to calculate discount
     // be careful here, the below may look very strange, how can we use a variable and then assign it back to itself? And what does / mean?!
     purchaseAmount = purchaseAmount - purchaseAmount / 10; // purchaseAmount = 500 - 500 / 10 = 500 - 50 = 450. 
 }
@@ -94,21 +94,21 @@ This may be a lot to take in, let's understand it.
 We need to calculate the discount for a purchase, so the purchase is worth 500 so we need to substract the discount from that. The following line handles that calculation:  
 `purchaseAmount = purchaseAmount - purchaseAmount / 10;` 
 
-Breaking this up, we get the following process of how the computer executes our code:
+If we break this down, we get the following process of how the computer executes our code:
 1. Take the value in purchaseAmount and we get: `purchaseAmount = 500 - 500 / 10`
 2. Calculate the division of 500 and 10, `/` means divide in programming so we get `500 / 10 = 50`
 3. Take the intermediate result of the above division and subtract it from purchaseAmount, our line may look like: `purchaseAmount = 500 - 50` 
 4. Calculate `500 - 50` and our line changes to: `purchaseAmount = 450;`
-5. Our calculation is complete and the computer concludes by re-assigning the value of `450` o our `purchaseAmount` variable 
+5. Our calculation is complete and the computer concludes by re-assigning the value of `450` to our `purchaseAmount` variable 
 
 It is important to note the order of operations here, divide took preference over the subtraction, if the computer instead did the subtraction first, we'd get a result of `purchaseAmount = 0 / 10` and that's not correct mathematically. And so, programming languages are aware enough to ensure our operations take place in the correct order, this is called `operator precedence`. Briefly, divide `/` has a higher precedence than subtraction `-`, just like in regular arithemetic.
 
 We could have also used parentheses in our program to explicitly describe our desired order of operations: `purchaseAmount = purchaseAmount - purchaseAmount / 10;` is equivalent to `purchaseAmount = purchaseAmount - (purchaseAmount / 10);`. Parentheses tell our program to do give everything inside of it the highest precedence, and is therefore evaluated before anything else.
 
 #### Floating Point Numbers
-Integers are certainly useful, but they don't always serve every situation well. To accurately model our store program, we need to be able to represent cents, i.e. fractional parts. That's where floating point numbers come in! The name _floating point_ refers to the dot that separates integral parts form fractional parts. The floating point number `250.99` has an integral part of `250` and a fractional part of `99`.
+Integers are certainly useful, but they don't always serve our needs. To accurately model our store program, we need to be able to represent cents, i.e. fractional parts. That's where floating point numbers come in! The name _floating point_ refers to the dot that separates integral parts from fractional parts. The floating point number `250.99` has an integral part of `250` and a fractional part of `99`.
 
-For now, we'll look at two floating point types `float` and `double`. To make our store program more accurate and realistic with discount calculations we can store our purchase amount as a `float`:
+For now, we'll look at two floating point types `float` and `double`. To make our store program more accurate and realistic with discount calculations we should store our purchase amount as a `float` type:
 
 ```
 var isRetired = true;
@@ -135,3 +135,30 @@ In our example we are dividing a `float` with an `int`, that means our operation
 *Beware* of something called _integer division_, this occur when dividing an `int` by another `int` and means we may lose numbers! Take for example `365 / 10`, you'd expect the result to be `36.5` (but that's a `float` type!), our result will in fact be just `36`, our `0.5` is thrust into the ether never to be seen again. This is because programming languages cannot make any assumptions as to what we are trying to achieve and must take the predictable path of always giving us a resultant `int` type when dividing two integers. 
 
 #### Number operations
+We've seen the use of addition `+` and division `/` operators here are a few more that help us craft real-world programs:
+1. `+` - addition of two numeric types
+2. `-` - subtraction of two numeric types
+3. `*` - multiplication of two numeric types
+4. `/` - division of two numeric types
+5. `%` - modules or remainder of two numeric types
+
+These `operators` is that they are called **binary operators**, because they operate on two operands.
+
+There also exists short-hand syntax for these operators that are involved in an assignment operation. For example, we can change the discount calculation in our program to the following, while maintaining it's meaning. 
+
+```
+...
+purchaseAmount -= purchaseAmount / 10;
+...
+```
+Notice the `-=` operator. This means, evaluate the right-hand side of `-=`, subtract it from `purchaseAmount` and assign that value back to `purchaseAmount`. Note that
+```
+purchaseAmount -= purchaseAmount / 10;
+```
+and
+```
+purchaseAmount = purchaseAmount - purchaseAmount / 10;
+```
+mean exactly the same thing
+
+Similar short-hand evaluation-assignment operators exist for all of the above listed binary operators: `+=`, `-=`, `*=`, `/=`, `%=`.
